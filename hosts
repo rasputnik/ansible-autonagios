@@ -1,0 +1,15 @@
+[nagios]
+localhost config_dir=/tmp/nagios
+
+[webservers]
+www1 http_port=80
+www2 http_port=80
+www3 http_port=8080
+
+[databases]
+db1 sql_port=5432
+db2 sql_port=5432
+
+[redises]
+redis1
+redis2

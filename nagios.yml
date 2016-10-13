@@ -1,0 +1,6 @@
+---
+
+- hosts: nagios
+  connection: local
+  roles:
+    - autonagios
