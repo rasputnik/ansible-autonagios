@@ -1,6 +1,8 @@
 ---
 
-- hosts: nagios
+- hosts: localhost
   connection: local
+  vars:
+    - config_dir: /tmp/nagios
   roles:
     - autonagios

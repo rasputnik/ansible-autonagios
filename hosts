@@ -1,6 +1,3 @@
-[nagios]
-localhost config_dir=/tmp/nagios
-
 [webservers]
 www1 http_port=80
 www2 http_port=80

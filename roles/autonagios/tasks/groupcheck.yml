@@ -1,7 +1,7 @@
 ---
 
 # 'invgroup' here is a hash
-- name: process {{ item }} (group {{invgroup.key }})
+- name: checks for group {{invgroup.key }}
   template: src=".{{ config_dir }}/{{ invgroup.key }}_template.j2"
             dest="{{ config_dir }}/{{ item }}_{{ invgroup.key }}.cfg"
   with_items: "{{ invgroup.value }}"
