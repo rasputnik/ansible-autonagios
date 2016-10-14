@@ -1,0 +1,6 @@
+# server name == {{ item }}
+
+{% for group in hostvars[item].group_names %}
+# check for {{ group }}
+{% endfor %}
+
