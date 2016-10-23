@@ -1,0 +1,8 @@
+# {% set hvs = hostvars[item] -%}
+
+service{
+  use local-service
+  host_name {{ item }}
+  service_description HTTP port {{ hvs.http_port }}
+  check_command check_http -P {{ hvs.http_port }}
+  }

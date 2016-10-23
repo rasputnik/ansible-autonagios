@@ -3,9 +3,9 @@
 - name: create config directory
   file: path={{ config_dir }} state=directory
 
-# call this include once for each inventory group.
-# inside the include, that group is called 'invgroup'
-- include: groupcheck.yml
-  with_dict: "{{ groups }}"
-  loop_control:
-    loop_var: invgroup
+- name: generate checks for {{ item }}
+  template: src=host-template.cfg.j2
+            dest={{ config_dir }}/{{ item }}.cfg
+  with_items:
+    - "{{ groups.all }}"
+

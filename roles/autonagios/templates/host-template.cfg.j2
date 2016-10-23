@@ -1,0 +1,40 @@
+# HOST DEF
+# {% set hvs = hostvars[item] -%}
+
+define host{
+  use                   linux-server
+  host_name             {{ item }}
+  address               {{ item }}
+  notification_interval 0
+}
+
+# common service checks
+
+define service{
+  use                   local-service
+  host_name             {{ item }}
+  service_description   PING
+  check_command         check_ping{{ hvs.nagios_ping_args }}
+  }
+
+define service{
+  use                   local-service
+  host_name             {{ item }}
+  service_description   Disk Space
+  check_command         check_snmp_disk{{ hvs.nagios_disk_args }}
+  }
+
+define service{
+  use                   local-service
+  host_name             {{ item }}
+  service_description   Current Load
+  check_command         check_remote_load{{ hvs.nagios_load_args }}
+  }
+
+# per-group service checks
+
+{% for member_group in hostvars[item].group_names %}
+## include {{ member_group }} checks
+{{ lookup('template', member_group + '.j2') }}
+##
+{% endfor %}
