@@ -1,16 +1,15 @@
 auto-generated nagios config
 ============================
 
-**proof of concept; not to be weaponized**
+**proof of concept; not to be weaponized (yet)**
 
-simple role (well, part of one) to generate 
-nagios service checks for each host in an inventory group.
+simple role to generate nagios service checks from inventory groups.
 
-Poops them out into localhosts {{ config_dir }}/{{ hostname }}.cfg
-- config_dir defaults to /tmp/nagios.
+This demo version creates a local config directory (/tmp/nagios by default)
+with a {{ hostname }}.cfg for each host in the inventory.
 
 nb: since these example hosts are fictional, we are limited
-to inventory varibles; when you do this for real,
+to inventory-level variables; on a realistic deployment,
 hostvars and facts should also be available.
 
 implementation
@@ -18,12 +17,11 @@ implementation
 
     ansible-playbook -i hosts nagios.yml
 
-the playbook runs against/on the nagios server (localhost by default),
-and walks *groups.all* to find every server.
+the playbook walks *groups.all* to find every server, then runs a
+'master template' (roles/autonagios/templates/host-template.yml)
 
-The master template generates 'universal' checks, and then
-loads a 'partial' for every group that server belongs to
-(typically 1, but this will handle many).
+The master template contains generic checks, and loads a 'partial' template 
+for each group the server belongs to.
 
 vars
 ====
