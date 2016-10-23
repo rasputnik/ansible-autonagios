@@ -1,0 +1,10 @@
+# {% set hvs = hostvars[item] %}
+
+{% for d, v in hvs.oracle_disks.iteritems() %}
+service {
+  use                 local-service
+  host_name           {{ item }}
+  service_description {{ d }} free space
+  check_command       check_snmp_disk!{{ d }}!{{ v }}!{{ v }}
+  }
+{% endfor %}

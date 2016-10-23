@@ -3,12 +3,9 @@
 - name: create config directory
   file: path={{ config_dir }} state=directory
 
-- name: list groups for {{ item }}
-  template: src=.{{ config_dir }}/host-template.cfg.j2
-            dest=/tmp/nagios/{{ item }}.cfg
+- name: generate checks for {{ item }}
+  template: src=host-template.cfg.j2
+            dest={{ config_dir }}/{{ item }}.cfg
   with_items:
     - "{{ groups.all }}"
-
-- name: debug
-  debug: msg={{ hostvars['www1'] }}
 

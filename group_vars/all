@@ -1,0 +1,3 @@
+nagios_ping_args: "!100.0,20%!500.0,60%"
+nagios_disk_args: "!/!80%!90%"
+nagios_load_args: "!1.8!2"
