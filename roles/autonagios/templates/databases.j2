@@ -1,7 +1,7 @@
 # {% set hvs = hostvars[item] %}
 
 {% for d, v in hvs.oracle_disks.iteritems() %}
-service {
+define service {
   use                 local-service
   host_name           {{ item }}
   service_description {{ d }} free space
